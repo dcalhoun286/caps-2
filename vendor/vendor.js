@@ -1,7 +1,11 @@
 'use strict';
 
+require('dotenv').config();
+
 const io = require('socket.io-client');
 
-const host = 'http://localhost:3333';
+const PORT = process.env.PORT;
+
+const host = `http://localhost:${PORT}`;
 
 const socket = io.connect(host);
