@@ -9,3 +9,7 @@ const PORT = process.env.PORT;
 const host = `http://localhost:${PORT}`;
 
 const socket = io.connect(host);
+
+function timestamp() {
+  return new Date().toDateString();
+}
