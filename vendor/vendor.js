@@ -8,7 +8,7 @@ const PORT = process.env.PORT;
 
 const host = `http://localhost:${PORT}`;
 
-const socket = io.connect(host);
+const socket = io.connect(`${host}/deliveries`);
 
 function timestamp() {
   return new Date().toDateString();
