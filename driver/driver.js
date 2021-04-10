@@ -11,7 +11,9 @@ const host = `http://localhost:${PORT}`;
 const caps = io.connect(`${host}/caps`);
 
 caps.on('pickup', orderPickedUp);
-// caps.on('in-transit', orderDelivered);
+caps.on('abcde', payload => {
+  console.log(payload);
+});
 
 function orderPickedUp(payload) {
   setTimeout(() => {
@@ -22,16 +24,12 @@ function orderPickedUp(payload) {
 
   }, 1500);
 
+  setTimeout(() => {
+
+    console.log(`delivery complete for order # ${payload.orderId}`);
+
+    caps.emit('delivered', payload);
+
+  }, 3000);
+
 }
-
-// function orderDelivered(payload) {
-
-//   setTimeout(() => {
-
-//     console.log(`delivery for order # ${payload.orderId} complete`);
-
-//     // caps.emit('delivered', payload);
-
-//   }, 3000);
-
-// }

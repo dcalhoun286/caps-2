@@ -8,10 +8,6 @@ const io = require('socket.io')(PORT);
 
 const caps = io.of('/caps');
 
-function timestamp() {
-  new Date().toDateString();
-}
-
 io.on('connection', (socket) => {
 
   console.log(`${socket.id} has joined the server`);
@@ -20,18 +16,25 @@ io.on('connection', (socket) => {
 
 caps.on('connection', (socket) => {
   socket.on('pickup', (payload) => {
-    // console.log(payload);
     socket.broadcast.emit('pickup', payload);
     console.log(`STATUS: order # ${payload.orderId} ready for pickup`)
   });
 
   socket.on('in-transit', (payload) => {
     setTimeout(() => {
+      
+      socket.broadcast.emit('abcde', payload);
       console.log(`STATUS: order # ${payload.orderId} is in transit`);
 
-      // socket.broadcast.emit('in-transit', payload);
     }, 500);
 
+  });
+
+  socket.on('delivered', (payload) => {
+
+    console.log(`STATUS: delivery complete for order # ${payload.orderId}`);
+
+    socket.broadcast.emit('delivered', payload);
   });
 
 });

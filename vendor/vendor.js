@@ -12,7 +12,13 @@ const host = `http://localhost:${PORT}`;
 
 const caps = io.connect(`${host}/caps`);
 
-setTimeout(() => {
+caps.on('delivered', deliveryComplete);
+
+function deliveryComplete(payload) {
+  console.log(`VENDOR: ${payload.storeName} -- Thank you for delivering order # ${payload.orderId}`);
+}
+
+setInterval(() => {
   let storeName = '1-206-flowers';
   let storeId = process.env.STOREID;
   let orderId = faker.datatype.uuid();
@@ -27,6 +33,7 @@ setTimeout(() => {
     shippingAddress: shippingAddress
   }
 
-  console.log(`the order id: ${payload.orderId}`)
-  caps.emit('pickup', payload)
+  // console.log(`the order id: ${payload.orderId}`);
+
+  caps.emit('pickup', payload);
 }, 5000);
