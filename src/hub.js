@@ -20,8 +20,8 @@ io.on('connection', (socket) => {
 
 caps.on('connection', (socket) => {
   socket.on('pickup', (payload) => {
-    console.log(payload);
-    // socket.broadcast.emit('pickup', payload);
+    // console.log(payload);
+    socket.broadcast.emit('pickup', payload);
     // console.log(`STATUS: order # ${payload.orderId} ready for pickup`)
   });
 });
