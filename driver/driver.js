@@ -8,4 +8,4 @@ const PORT = process.env.PORT;
 
 const host = `http://localhost:${PORT}`;
 
-const socket = io.connect(`${host}/deliveries`);
+const caps = io.connect(`${host}/caps`);
