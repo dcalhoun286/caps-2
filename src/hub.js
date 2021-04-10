@@ -22,6 +22,16 @@ caps.on('connection', (socket) => {
   socket.on('pickup', (payload) => {
     // console.log(payload);
     socket.broadcast.emit('pickup', payload);
-    // console.log(`STATUS: order # ${payload.orderId} ready for pickup`)
+    console.log(`STATUS: order # ${payload.orderId} ready for pickup`)
   });
+
+  socket.on('in-transit', (payload) => {
+    setTimeout(() => {
+      console.log(`STATUS: order # ${payload.orderId} is in transit`);
+
+      // socket.broadcast.emit('in-transit', payload);
+    }, 500);
+
+  });
+
 });

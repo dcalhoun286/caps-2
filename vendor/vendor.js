@@ -12,7 +12,7 @@ const host = `http://localhost:${PORT}`;
 
 const caps = io.connect(`${host}/caps`);
 
-setInterval(() => {
+setTimeout(() => {
   let storeName = '1-206-flowers';
   let storeId = process.env.STOREID;
   let orderId = faker.datatype.uuid();
