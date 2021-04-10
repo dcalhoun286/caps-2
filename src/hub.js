@@ -6,11 +6,7 @@ const PORT = process.env.PORT || 3333;
 
 const io = require('socket.io')(PORT);
 
-const deliveries = io.of('/deliveries');
-
-
-// How does this server handle each connection?
-// This is like the switchboard operators
+const caps = io.of('/caps');
 
 function timestamp() {
   new Date().toDateString();
@@ -18,7 +14,14 @@ function timestamp() {
 
 io.on('connection', (socket) => {
 
-  console.log(`${socket.id} has joined the server}`);
-
+  console.log(`${socket.id} has joined the server`);
   
+});
+
+caps.on('connection', (socket) => {
+  socket.on('pickup', (payload) => {
+    console.log(payload);
+    // socket.broadcast.emit('pickup', payload);
+    // console.log(`STATUS: order # ${payload.orderId} ready for pickup`)
+  });
 });
