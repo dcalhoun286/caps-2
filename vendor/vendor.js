@@ -12,10 +12,6 @@ const host = `http://localhost:${PORT}`;
 
 const caps = io.connect(`${host}/caps`);
 
-function timestamp() {
-  return new Date().toDateString();
-}
-
 setInterval(() => {
   let storeName = '1-206-flowers';
   let storeId = process.env.STOREID;
